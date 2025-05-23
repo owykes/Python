@@ -11,7 +11,7 @@ print(f"Nice to meet you {user_name}")
 chatbot_age = 32
 user_age = int(input("How old are you? "))
 
-#age sifference sum
+#age difference sum
 age_difference = chatbot_age - user_age
 
 #age difference working
@@ -26,5 +26,5 @@ else:
 time.sleep(2)
 
 #goodbye statement  
-print("It's nice chatting to you. Hope to see you around. Have a nice day")
+print(f"It's nice chatting to you {user_name}. Hope to see you around. Have a nice day")
 
