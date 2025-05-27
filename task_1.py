@@ -22,26 +22,23 @@ def property_data():
     clear_screen()
     while True:
         property_id = input("Enter Property ID: ").strip().upper()
-        property_data = property_details.get(property_id) #safelookup 
-
-        if property_data:
+        property_info = property_details.get(property_id) #safelookup 
+        if property_info:
             print("\nProperty found")
             break
         else:
             print("Please Enter a Valid Property ID")
     #ask for user input for values in new keys
-    description = input("\nEnter Entry Description: ").strip()
-    
+    description = input("\nEnter Entry Description: ").strip() 
     #asks for value input, and handles value errors
     while True:
         try:
             amount = float(input("\nEnter Amount: "))
             break
         except ValueError:
-            print("Please enter a number")
-        
+            print("Please enter a number")    
     #appends the new keys to the dictionary
-    property_data["Entries"].append((description, amount))
+    property_info["Entries"].append((description, amount))
     print("Entry added")
     wait_for_enter()
         
@@ -49,6 +46,7 @@ def property_data():
 #view stored data in list
 def summary_data():
     clear_screen() 
+    print()
     #placeholder
     print("placeholder")   
     wait_for_enter()
