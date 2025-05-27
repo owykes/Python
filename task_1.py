@@ -8,7 +8,7 @@ def wait_for_enter():
         if input("\nPress Enter to return to the menu...") == "":
             break
 
-#hardcoded property detials from table 1
+#hardcoded property detials from table 1 in dictionary
 property_details = {
     "B12-3AB": {"Original cost": 153450, "Residual mortgage": 112345, "Entries": []},
     "B13-4CD": {"Original cost": 212130, "Residual mortgage": 180234, "Entries": []},
@@ -28,7 +28,7 @@ def property_data():
             break
         else:
             print("Please Enter a Valid Property ID")
-    #ask for user input for values in new keys
+    #ask for user input for description dictionary 
     description = input("\nEnter Entry Description: ").strip() 
     #asks for value input, and handles value errors
     while True:
@@ -37,12 +37,14 @@ def property_data():
             break
         except ValueError:
             print("Please enter a number")    
-    #appends the new keys to the dictionary
-    property_info["Entries"].append((description, amount))
+    #appends the new to the dictionarys into the new list
+    property_info["Entries"].append({"Description": description, "Amount": amount})
     print("Entry added")
+    print(property_details)
     wait_for_enter()
         
     
+
 #view stored data in list
 def summary_data():
     clear_screen() 
