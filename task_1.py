@@ -21,26 +21,27 @@ property_details = {
 def property_data():
     clear_screen()
     while True:
-        property_id = input("Enter Property ID: ").strip().upper()
+        property_id = input("Enter Property#: ").strip().upper()
         property_info = property_details.get(property_id) #safelookup 
         if property_info:
             print("\nProperty found")
+            clear_screen()
             break
         else:
-            print("Please Enter a Valid Property ID")
+            print("Please Enter a Valid Property#")
     #ask for user input for description dictionary 
-    description = input("\nEnter Entry Description: ").strip() 
+    description = input("Enter Entry Description: ").strip() 
     #asks for value input, and handles value errors
     while True:
         try:
             amount = float(input("\nEnter Amount: "))
             break
         except ValueError:
-            print("Please enter a number")    
+            print("\nPlease enter a valid amount")    
     #appends the new to the dictionarys into the new list
     property_info["Entries"].append({"Description": description, "Amount": amount})
     print("Entry added")
-    print(property_details)
+    print(property_details) #testprint
     wait_for_enter()
         
     
