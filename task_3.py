@@ -45,7 +45,8 @@ def property_data():
 #placeholder subroutine for summary data
 def summary_data():
     clear_screen()
-    print("Property Summary")  
+    print(f"{'Property#':<15}{'Original cost':<25}{'Repairs':<15}{'Amended cost':<20}{'Residual mortgage':<25}{'Rents':<10}{'Rent as % of Mortgage':<10}")  
+    print("=" * 110)
     wait_for_enter()
  
 #displays menu and handles user selection
