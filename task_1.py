@@ -20,7 +20,7 @@ def summary_data():
     print("Property Summary")  
     wait_for_enter()
  
-#displays menu and handles user selection
+#displays menu function
 def rental_management_menu():
     while True:   
         clear_screen()
@@ -42,8 +42,8 @@ def rental_management_menu():
         else:
             print("Invalid choice, please select 1,2 or 3")
             wait_for_enter()
-           
-           
+
+#calls the menu function                      
 rental_management_menu()
 
 

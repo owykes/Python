@@ -10,11 +10,11 @@ def wait_for_enter():
 
 #hardcoded property detials from table 1 in dictionary
 property_details = {
-    "B12-3AB": {"Original cost": 153450, "Residual mortgage": 112345, "Entries": []},
-    "B13-4CD": {"Original cost": 212130, "Residual mortgage": 180234, "Entries": []},
-    "B14-5GH": {"Original cost": 120100, "Residual mortgage": 85980, "Entries": []},
-    "B15-6JK": {"Original cost": 135230, "Residual mortgage": 101321, "Entries": []},
-    "B16-7MO": {"Original cost": 183230, "Residual mortgage": 130234, "Entries": []}
+    "B12-3AB": {"Original cost": 153450, "Residual mortgage": 112345},
+    "B13-4CD": {"Original cost": 212130, "Residual mortgage": 180234},
+    "B14-5GH": {"Original cost": 120100, "Residual mortgage": 85980},
+    "B15-6JK": {"Original cost": 135230, "Residual mortgage": 101321},
+    "B16-7MO": {"Original cost": 183230, "Residual mortgage": 130234}
 }
 #asks for input, validates property id key, removing whitespace, handles incorrect capatilisation, avoids key errors
 def property_data():
@@ -37,8 +37,8 @@ def property_data():
             break
         except ValueError:
             print("\nPlease enter a valid amount")    
-    #appends the new to the dictionarys into the new list
-    property_info["Entries"].append({"Description": description, "Amount": amount})
+    #appends directly into the dictionary
+    property_info[description] = amount
     print("\nEntry added")
     wait_for_enter()
         
