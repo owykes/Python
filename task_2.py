@@ -8,7 +8,7 @@ def wait_for_enter():
         if input("\nPress Enter to return to the menu...") == "":
             break
 
-#hardcoded property detials from table 1 in dictionary
+#hardcoded property detials from table 1 in a dictionary
 property_details = {
     "B12-3AB": {"Original cost": 153450, "Residual mortgage": 112345},
     "B13-4CD": {"Original cost": 212130, "Residual mortgage": 180234},

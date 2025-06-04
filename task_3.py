@@ -45,8 +45,8 @@ def property_data():
 #placeholder subroutine for summary data
 def summary_data():
     clear_screen()
-    print()
-    print("=" * 90)  
+    
+     
     wait_for_enter()
  
 #displays menu and handles user selection
