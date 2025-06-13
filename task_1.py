@@ -7,6 +7,11 @@ def wait_for_enter():
     while True:
         if input("\nPress Enter to return to the menu...") == "":
             break
+def display_menu():
+        print("Rental Management Menu")
+        print("\t1. Enter rental property details")
+        print("\t2. Display summary for rentals")
+        print("\t3. Exit")
 
 #placeholder subroutine for property data
 def property_data():
@@ -24,11 +29,7 @@ def summary_data():
 def rental_management_menu():
     while True:   
         clear_screen()
-        print("Rental Management Menu")
-        print("1. Enter rental property details")
-        print("2. Display summary for rentals")
-        print("3. Exit")
-        
+        display_menu()
         #prompts user for selection
         selection = input("\nEnter your Selection: ")
 
