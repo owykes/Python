@@ -26,8 +26,6 @@ property_details = {
 #Empty list for entries
 entries = []
 
-
-
 def property_data():
     """
     Handles user input for property entries.
