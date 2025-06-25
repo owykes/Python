@@ -33,25 +33,27 @@ def property_data():
     and appends the inputs to the entries list 
     
     """
+    clear_screen()
     while True:
-        clear_screen()
         property_id = input("Enter Property#: ").strip().upper()
-        #Rejects blank input so users cant submit to an empty property ID
+        #Rejects blank input so users can't submit to an empty property ID
         if not property_id:
-            print("You must enter a Property#")
+            print("\nYou must enter a Property#\n")
             continue
         #Warns user if property is not part of the original dataset
         if property_id not in property_details:
-            print("note - this property is not in the original dataset, however the transaction will still be stored.")
-        #Ask for user input for description dictionary and handles no input
-        description = input("Enter Entry Description: ").strip()
-        if not description:
-            print("You must enter a description.")
-            continue
+            print("\nNote - this property is not in the original dataset, however the entry will still be stored.")
+        while True:
+            #Asks for user input for description dictionary and handles no input
+            description = input("\nEnter entry description: ").strip()
+            if not description:
+                print("\nYou must enter a description.")
+            else:
+                break
         #Asks for value input, and handles value errors
         while True:
             try:
-                amount = float(input("\nEnter Amount: "))
+                amount = int(input("\nEnter Amount: "))
                 break
             except ValueError:
                 print("\nPlease enter a valid amount")    
@@ -61,7 +63,9 @@ def property_data():
             "description": description,
             "amount": amount
         })
+        print(f"\n{entries}")
         wait_for_enter()
+        break
         
 #Placeholder subroutine for summary data
 def summary_data():
