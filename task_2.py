@@ -63,7 +63,6 @@ def property_data():
             "description": description,
             "amount": amount
         })
-        print(f"\n{entries}")
         wait_for_enter()
         break
         
