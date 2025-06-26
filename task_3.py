@@ -71,13 +71,28 @@ def summary_data():
     clear_screen()
     total_original_cost = 0
     total_residual_mortgage = 0
-    Repairs = 0
+    total_repairs = 0
+    total_rent = 0
+    total_percent_of_mortgage = 0
+    
+    print("Property#\tOriginal cost\tRepairs\tAmended cost\tResidual mortgage\tRents\tRents as % of Mortgage")
     
     for property in property_details.values():
         total_original_cost += property["Original cost"]
         total_residual_mortgage += property["Residual mortgage"]
-    print("Property#\tOriginal cost\tRepairs\tAmended cost\tResidual mortgage\tRents\tRents as % of Mortgage")
-    print(f"Total\t\t{total_original_cost}\t\t\t\t\t{total_residual_mortgage}")
+        
+    total_amended_cost = total_original_cost
+    
+    for entry in entries:
+        if entry["amount"] < 0:
+            total_repairs += entry["amount"]
+        else:
+            total_rent += entry["amount"] 
+            total_ammended_cost += entry["amount"]
+
+
+   
+    print(f"Total\t\t{total_original_cost}\t{total_repairs}\t{total_amended_cost}\t{total_residual_mortgage}\t{total_rent}\t{total_percent_of_mortgage}")
           
     
     print()
