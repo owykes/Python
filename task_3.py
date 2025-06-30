@@ -74,25 +74,34 @@ def summary_data():
     total_repairs = 0
     total_rent = 0
     total_percent_of_mortgage = 0
+    total_ammended_cost = 0
     
     print("Property#\tOriginal cost\tRepairs\tAmended cost\tResidual mortgage\tRents\tRents as % of Mortgage")
+    print("=" * 85)
     
-    for property in property_details.values():
-        total_original_cost += property["Original cost"]
-        total_residual_mortgage += property["Residual mortgage"]
+    #loops throught all items in nested dictionaries
+    for property_id, details in property_details.items():
+        original = details["Original cost"]
+        residual = details["Residual mortgage"]
+        #updates total variables from temp variables
+        total_original_cost += original
+        total_residual_mortgage += residual
+        
+        print(f"{property_id}\t\t£{original}\t\t£{residual}")
         
     total_amended_cost = total_original_cost
     
+    #loops through dictionary data
     for entry in entries:
         if entry["amount"] < 0:
             total_repairs += entry["amount"]
         else:
             total_rent += entry["amount"] 
             total_ammended_cost += entry["amount"]
+    
 
-
-   
-    print(f"Total\t\t{total_original_cost}\t{total_repairs}\t{total_amended_cost}\t{total_residual_mortgage}\t{total_rent}\t{total_percent_of_mortgage}")
+    print("=" * 85)
+    print(f"Total\t\t£{total_original_cost}\t\t£{total_repairs}\t£{total_amended_cost}\t£{total_residual_mortgage}\t£{total_rent}\t{total_percent_of_mortgage}")
           
     
     print()
