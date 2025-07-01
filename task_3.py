@@ -66,55 +66,58 @@ def property_data():
         wait_for_enter()
         break
         
-#Placeholder subroutine for summary data
+#
 def summary_data():
     clear_screen()
+    #prints headers
+    print("Property#\tOriginal cost\tRepairs\tAmended cost\tResidual mortgage\tRents\tRents as % of Mortgage")
+    #creates variables to store data later
     total_original_cost = 0
     total_residual_mortgage = 0
     total_repairs = 0
     total_rent = 0
     total_percent_of_mortgage = 0
-    total_ammended_cost = 0
-    
-    print("Property#\tOriginal cost\tRepairs\tAmended cost\tResidual mortgage\tRents\tRents as % of Mortgage")
-    print("=" * 85)
-    
+    total_amended_cost = 0
     #loops throught all items in nested dictionaries
     for property_id, details in property_details.items():
-        original = details["Original cost"]
-        residual = details["Residual mortgage"]
-        #updates total variables from temp variables
-        total_original_cost += original
-        total_residual_mortgage += residual
-        
-        print(f"{property_id}\t\t£{original}\t\t£{residual}")
-        
-    total_amended_cost = total_original_cost
-    
-    #loops through dictionary data
-    for entry in entries:
-        if entry["amount"] < 0:
-            total_repairs += entry["amount"]
-        else:
-            total_rent += entry["amount"] 
-            total_ammended_cost += entry["amount"]
-    
+        original_cost = details["Original cost"]
+        residual_cost = details["Residual mortgage"]
+        repairs = 0
+        rent = 0     
+        #loops through dictionary data
+        for entry in entries:
+            if entry["Property#"] == property_id:        
+                if entry["amount"] < 0:
+                    repairs += entry["amount"]
+                else:
+                    rent += entry["amount"] 
+        #updates amended cost 
+        amended_cost = original_cost + repairs
+        #calculates mortgage percentage
+        mortgage_percentage = (rent / residual_cost) * 100 if residual_cost else 0
+        #updates totals
+        total_original_cost += original_cost
+        total_residual_mortgage += residual_cost
+        total_repairs += repairs
+        total_rent += rent
+        total_amended_cost += amended_cost
+        total_percent_of_mortgage += mortgage_percentage
+        #prints per property totals
+        print(f"{property_id}\t\t£{original_cost}\t\t£{repairs}\t£{amended_cost}\t\t£{residual_cost}\t\t\t£{rent}\t{mortgage_percentage:.2f}%")
+    #calculates average rent as a percentage of mortgage
+    average_percentage = total_percent_of_mortgage / len(property_details) 
+    #prints totals
+    print(f"Total\t\t£{total_original_cost}\t\t£{total_repairs}\t£{total_amended_cost}\t\t£{total_residual_mortgage}\t\t\t£{total_rent}\t{average_percentage:.2f}%")
+    wait_for_enter() 
 
-    print("=" * 85)
-    print(f"Total\t\t£{total_original_cost}\t\t£{total_repairs}\t£{total_amended_cost}\t£{total_residual_mortgage}\t£{total_rent}\t{total_percent_of_mortgage}")
-          
-    
-    print()
-    wait_for_enter()
- 
 #Displays menu and handles user selection
 def rental_management_menu():
     while True:   
         clear_screen()
         display_menu()
         #Prompts user for selection
-        selection = input("\nEnter your Selection: ")
 
+        selection = input("\nEnter your Selection: ")
         if selection == "1":
             property_data()
         elif selection == "2":
