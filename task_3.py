@@ -42,7 +42,8 @@ def property_data():
             continue
         #Warns user if property is not part of the original dataset
         if property_id not in property_details:
-            print("\nNote - this property is not in the original dataset, however the entry will still be stored.")
+            print(f"\n{property_id} is not in the original dataset")
+            continue
         while True:
             #Asks for user input for description dictionary and handles no input
             description = input("\nEnter entry description: ").strip()
@@ -66,8 +67,14 @@ def property_data():
         wait_for_enter()
         break
         
-#
+
 def summary_data():
+    """
+    Handles calculation and display of rental property summary data,
+    Loops through hardcoded data to match with dynamically added user data from task 2,
+    Creates totals per property and per column, as well as adjusting totals for cost, mortgage and percentage of mortgage paid.
+
+    """
     clear_screen()
     #prints headers
     print("Property#\tOriginal cost\tRepairs\tAmended cost\tResidual mortgage\tRents\tRents as % of Mortgage")
