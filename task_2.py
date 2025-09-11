@@ -42,7 +42,7 @@ def property_data():
             continue
         #Warns user if property is not part of the original dataset
         if property_id not in property_details:
-            print(f"\n{property_id} is not in the original dataset\n")
+            print(f"\n{property_id} is not in the original dataset\n1")
             continue
         while True:
             #Asks for user input for description dictionary and handles no input

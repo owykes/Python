@@ -86,7 +86,7 @@ def summary_data():
     total_percent_of_mortgage = 0
     total_amended_cost = 0
     #loops throught all items in nested dictionaries
-    for property_id, details in property_details.items():
+    for property_id, details in property_details.items():1
         original_cost = details["Original cost"]
         residual_cost = details["Residual mortgage"]
         repairs = 0
