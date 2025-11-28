@@ -1,5 +1,6 @@
 import math
 
+
 def is_it_prime(n):
     if n <= 1: 
         return False
@@ -16,12 +17,12 @@ def is_it_prime(n):
         i += 6
     return True
 
-if __name__ == "__main__":
-    while True:
-        try:
-            num = int(input("Enter a number (or 0 to exit): "))
-            if num == 0:
-                break
-            print(f"{num} is prime? {is_it_prime(num)}")
-        except ValueError:
-            print("Please enter a valid integer.")
+def check_prime():
+    try:
+        n = int(input("Enter a integer: "))
+        result = "It's prime" if is_it_prime(n) else "It's not prime"
+        print(f"{result}!")
+    except ValueError:
+        print("Please enter a valid integer.")
+
+check_prime()
