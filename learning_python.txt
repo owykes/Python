@@ -1,0 +1,1 @@
+In Python you can store data in various data structures. In Python you can use classes to define objects. In Python you can import modules, both premaid and your own to use in your code.
