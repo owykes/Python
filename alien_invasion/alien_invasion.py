@@ -201,7 +201,8 @@ class AlienInvasion:
         """Check if any aliens ahve reached the bottom of the screen"""
         for alien in self.aliens.sprites():
             if alien.rect.bottom >= self.settings.screen_height:
-                self._ship_hit
+                #treat the same as if the ship got hit
+                self._ship_hit()
                 break
     def _check_play_button(self, mouse_pos):
         """start a new game when player clicks play."""
@@ -211,13 +212,13 @@ class AlienInvasion:
             self.stats.reset_stats()
             self.game_active = True      
 
-        # Get rid of any remaining bullets and aliens.
-        self.bullets.empty()
-        self.aliens.empty()
+            # Get rid of any remaining bullets and aliens.
+            self.bullets.empty()
+            self.aliens.empty()
 
-        # Create a new fleet and center adn the ship.
-        self._create_fleet()
-        self.ship.center_ship()
+            # Create a new fleet and center adn the ship.
+            self._create_fleet()
+            self.ship.center_ship()
             
 if __name__ == '__main__':
     #make a game instance, and run the game.
