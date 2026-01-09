@@ -168,19 +168,17 @@ class AlienInvasion:
         if self.stats.ships_left > 0:
             # decrement ships left.
             self.stats.ships_left -= 1
-
             # get rid of any remaining bullets and aliens. 
             self.bullets.empty()
             self.aliens.empty()
-
             # Create a new fleet adnnd center the ship
             self._create_fleet()
             self.ship.center_ship()
-
             # pause.
             sleep(0.5)
         else: 
             self.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _update_screen(self):   
         """update images om the screen, and flip to the new screen"""
@@ -204,6 +202,7 @@ class AlienInvasion:
                 #treat the same as if the ship got hit
                 self._ship_hit()
                 break
+
     def _check_play_button(self, mouse_pos):
         """start a new game when player clicks play."""
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
@@ -220,6 +219,9 @@ class AlienInvasion:
             self._create_fleet()
             self.ship.center_ship()
             
+            # hide the mouse cursor.
+            pygame.mouse.set_visible(False)
+
 if __name__ == '__main__':
     #make a game instance, and run the game.
     ai = AlienInvasion()
