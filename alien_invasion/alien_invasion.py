@@ -185,7 +185,7 @@ class AlienInvasion:
         self.screen.fill(self.settings.bg_color)
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
-        self.ship.blitme()
+        self.ship.blitme()  
         self.aliens.draw(self.screen)
 
         # draw the play button if the game is inactive
