@@ -5,14 +5,14 @@ def bubble_sort(arr):
     passess through the list to sort. Best case O(n), Average O(n^2), worst case O(n^2)"""
     print(arr)
     for i in range(len(arr) -1, 0 , -1):
-        no_swap = True
+        sorted = True
         for j in range(0 , i):
             if arr[j + 1] < arr [j]:
                 arr[j], arr[j + 1] = arr[j + 1], arr[j] 
-                no_swap = False 
+                sorted = False 
                 # Print tracks sort
                 print(arr)
-        if no_swap:
+        if sorted:
             return arr    
     return arr
 
