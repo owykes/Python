@@ -9,6 +9,7 @@ from bullet import Bullet
 from alien import Alien
 from game_stats import GameStats
 from button import Button
+from scoreboard import Scoreboard
 
 class AlienInvasion:
     """Overall class to manage game assets and behaviour"""
@@ -39,20 +40,29 @@ class AlienInvasion:
         
         # make the play button.
         self.play_button = Button(self, "Play")
+        # settings button placement and creation
         self.settings_button = Button(self, "Settings")
-        #settings button pacement and creation
-        self.settings_button.rect.y += 50
-        #make setings options and placement 
+        self.settings_button.rect.y = self.play_button.rect.y + 70
+        self.settings_button.msg_image_rect.center = self.settings_button.rect.center
+        # make settings options and placement
+        # easy 
         self.easy_difficulty_button = Button(self, "Easy")
+        # medium
         self.medium_difficulty_button = Button(self, "Medium")
-        self.medium_difficulty_button.rect.y += 50
+        self.medium_difficulty_button.rect.y = self.easy_difficulty_button.rect.y +70
+        self.medium_difficulty_button.msg_image_rect.center = self.medium_difficulty_button.rect.center
+        # hard
         self.hard_difficulty_button = Button(self, "Hard")
-        self.hard_difficulty_button.rect.y += 100
-        #make back button and placement
+        self.hard_difficulty_button.rect.y = self.medium_difficulty_button.rect.y +70
+        self.hard_difficulty_button.msg_image_rect.center = self.hard_difficulty_button.rect.center
+        # make back button and placement
         self.back_button = Button(self, "Back")
-        self.back_button.rect.y += 150
+        self.back_button.rect.y = self.hard_difficulty_button.rect.y + 70
+        self.back_button.msg_image_rect.center = self.back_button.rect.center
         #make sure settings doesnt show until pressed
         self.show_settings = False
+        #set easy to be the default difficulty setting
+        self.settings.easy()
 
     def run_game(self):
         """start main loop for the game"""
@@ -84,6 +94,9 @@ class AlienInvasion:
                     self._check_settings_button(mouse_pos)
                 else:
                     self._check_back_button(mouse_pos)
+                    self._check_easy_button(mouse_pos)
+                    self._check_medium_button(mouse_pos)
+                    self._check_hard_button(mouse_pos)
 
     def _check_keydown_events(self, event):
         """Respond to key presses"""
@@ -247,6 +260,18 @@ class AlienInvasion:
     def _check_back_button(self, mouse_pos):
         if self.back_button.rect.collidepoint(mouse_pos):
             self.show_settings = False
+
+    def _check_easy_button(self, mouse_pos):
+        if self.easy_difficulty_button.rect.collidepoint(mouse_pos):
+            self.settings.easy()
+
+    def _check_medium_button(self, mouse_pos):
+        if self.medium_difficulty_button.rect.collidepoint(mouse_pos):
+            self.settings.medium()
+
+    def _check_hard_button(self, mouse_pos):
+        if self.hard_difficulty_button.rect.collidepoint(mouse_pos):
+            self.settings.hard()
 
     def _start_game(self):
         # reset the game statistics 
