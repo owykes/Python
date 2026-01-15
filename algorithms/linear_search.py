@@ -2,7 +2,7 @@ from helper import generate_list
 from helper import get_target
 
 def linear_search(arr, target):
-    """Linear search for target in list, time complexity is: worst case O(n), average O(n), best case O(1) 
+    """Linear search for target in list, time complexity is: worst case O(n), best case O(1) 
     you check every element in the list sequentially until you find the target"""
     for i in range(len(arr)):
         if arr[i] == target:

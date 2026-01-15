@@ -3,7 +3,7 @@ from helper import generate_list
 def insertion_sort(arr):
     """Insertion sort takes a on item fom a list and decalres it as sorted,
     adding unsorted elements their sutiatable polace for each iteration after
-    best case: O(n), avg case: O(n^"2), worst case: O(n^2)"""
+    best case: O(n), worst case: O(n^2)"""
     print(arr)
     
     for step in range(1, len(arr)):
@@ -14,7 +14,7 @@ def insertion_sort(arr):
         # For descending order, change key<array[j] to key>array[j]
         while j >= 0 and key < arr[j]:
             arr[j + 1] = arr[j]
-            j = j -1
+            j = j - 1
 
         # place key at after the element just smaller than it
         arr[j + 1] = key
