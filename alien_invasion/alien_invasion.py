@@ -10,6 +10,7 @@ from alien import Alien
 from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
+import random
 
 class AlienInvasion:
     """Overall class to manage game assets and behaviour"""
@@ -38,32 +39,11 @@ class AlienInvasion:
 
         #Start Alien Invasion in an active state.
         self.game_active = False
+
+        # Show Main menu
+        self._setup_menu()
         
-        # make the play button.
-        self.play_button = Button(self, "Play")
-        # settings button placement and creation
-        self.settings_button = Button(self, "Settings")
-        self.settings_button.rect.y = self.play_button.rect.y + 70
-        self.settings_button.msg_image_rect.center = self.settings_button.rect.center
-        # make settings options and placement
-        # easy 
-        self.easy_difficulty_button = Button(self, "Easy")
-        # medium
-        self.medium_difficulty_button = Button(self, "Medium")
-        self.medium_difficulty_button.rect.y = self.easy_difficulty_button.rect.y +70
-        self.medium_difficulty_button.msg_image_rect.center = self.medium_difficulty_button.rect.center
-        # hard
-        self.hard_difficulty_button = Button(self, "Hard")
-        self.hard_difficulty_button.rect.y = self.medium_difficulty_button.rect.y +70
-        self.hard_difficulty_button.msg_image_rect.center = self.hard_difficulty_button.rect.center
-        # make back button and placement
-        self.back_button = Button(self, "Back")
-        self.back_button.rect.y = self.hard_difficulty_button.rect.y + 70
-        self.back_button.msg_image_rect.center = self.back_button.rect.center
-        #make sure settings doesnt show until pressed
-        self.show_settings = False
-        #set easy to be the default difficulty setting
-        self.settings.easy()
+ 
 
     def run_game(self):
         """start main loop for the game"""
@@ -229,16 +209,37 @@ class AlienInvasion:
 
     def _update_screen(self):   
         """update images om the screen, and flip to the new screen"""
-        self.screen.fill(self.settings.bg_color)
-        for bullet in self.bullets.sprites():
-            bullet.draw_bullet()
-        self.ship.blitme()   
-        self.aliens.draw(self.screen)
-        # draw the scoreboard information
-        self.sb.show_score()
+        
+        if self.game_active:
+            self.screen.fill(self.settings.bg_color)
+            for bullet in self.bullets.sprites():
+                bullet.draw_bullet()
+            self.ship.blitme()   
+            self.aliens.draw(self.screen)
+            # draw the scoreboard information
+            self.sb.show_score()
 
-        # draw the play button if the game is inactive
-        if not self.game_active:
+            # draw the play button if the game is inactive
+        else:
+            
+            now = pygame.time.get_ticks()
+
+            #flash logic
+            if not self.flashing and now >= self.next_flash:
+                self.flashing = True
+                self.flash_end_time = now + self.flash_duration
+
+            if self.flashing and now >= self.flash_end_time:
+                self.flashing = False
+                self.next_flash = now + random.randint(2000, 6000)
+            #pick frame 
+            frame = self.menu_after if self.flashing else self.menu_before
+            #scale to fulscreen
+            frame = pygame.transform.scale(frame, (self.settings.screen_width, self.settings.screen_height))
+            # draw background
+            self.screen.blit(frame, (0,0))
+
+        
             if not self.show_settings:
                 self.play_button.draw_button()
                 self.settings_button.draw_button()
@@ -264,6 +265,7 @@ class AlienInvasion:
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.game_active:
             self.settings.initialize_dynamic_settings()
+            self.game_active = True
             self._start_game()
     
     def _check_settings_button(self, mouse_pos):
@@ -305,6 +307,42 @@ class AlienInvasion:
             
         # hide the mouse cursor.
         pygame.mouse.set_visible(False)
+    
+    def _setup_menu(self):
+        #load menu images
+        self.menu_before = pygame.image.load("alien_invasion/images/alien_invasion_before.png")
+        self.menu_after = pygame.image.load("alien_invasion/images/alien_invasion_after.png")
+
+        #flash timing
+        self.flash_duration = 150
+        self.next_flash = pygame.time.get_ticks() + 3000
+        self.flashing = False
+
+        # make the play button.
+        self.play_button = Button(self, "Play")
+        # settings button placement and creation
+        self.settings_button = Button(self, "Settings")
+        self.settings_button.rect.y = self.play_button.rect.y + 70
+        self.settings_button.msg_image_rect.center = self.settings_button.rect.center
+        # make settings options and placement
+        # easy 
+        self.easy_difficulty_button = Button(self, "Easy")
+        # medium
+        self.medium_difficulty_button = Button(self, "Medium")
+        self.medium_difficulty_button.rect.y = self.easy_difficulty_button.rect.y +70
+        self.medium_difficulty_button.msg_image_rect.center = self.medium_difficulty_button.rect.center
+        # hard
+        self.hard_difficulty_button = Button(self, "Hard")
+        self.hard_difficulty_button.rect.y = self.medium_difficulty_button.rect.y +70
+        self.hard_difficulty_button.msg_image_rect.center = self.hard_difficulty_button.rect.center
+        # make back button and placement
+        self.back_button = Button(self, "Back")
+        self.back_button.rect.y = self.hard_difficulty_button.rect.y + 70
+        self.back_button.msg_image_rect.center = self.back_button.rect.center
+        #make sure settings doesnt show until pressed
+        self.show_settings = False
+        #set easy to be the default difficulty setting
+        self.settings.easy()
 
 
 if __name__ == '__main__':
