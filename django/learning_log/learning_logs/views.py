@@ -40,7 +40,7 @@ def new_entry(request, topic_id):
     """Add a new entry for a particular entry"""
     topic = Topic.objects.get(id=topic_id)
 
-    if request.methos != 'POST':
+    if request.method != 'POST':
         # No data submitted; create a blank form.
         form = EntryForm()
     else:
