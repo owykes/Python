@@ -1,8 +1,8 @@
 import sys
 import heapq
-from helper import generate_graph
+from helper import generate_edge_list, edge_list_to_adj_list, plot_graph, extract_tree_edges, distance_to_colors 
 
-# Dijkstra's shortest path
+# Dijkstra's shortest path - pathfinding algorithm
 
 def dijkstra(adjacent, source):
 
@@ -12,6 +12,7 @@ def dijkstra(adjacent, source):
     pq = []
 
     distance = [sys.maxsize] * vertices
+    parent = [None] * vertices 
 
     # Distance from source to itself is 0
     distance[source] = 0
@@ -28,20 +29,33 @@ def dijkstra(adjacent, source):
 
         # Explore all neighbors of the current vertex
         for v, w in adjacent[u]:
-
             # If we found a shorter path to v through u, update it
             if distance[u] + w < distance[v]:
                 distance[v] = distance[u] + w
+                parent[v] = u
                 heapq.heappush(pq, (distance[v], v))
 
     # Return the final shortest distances from the source
-    return distance
+    return distance, parent
 
 if __name__ == "__main__":
-    graph = generate_graph(6)
-    print("Generated graph:")
-    print(graph)
+    edges = generate_edge_list(6)
+    print(f"Generated edges: {edges}")
+   
+    graph = edge_list_to_adj_list(edges)
+    print(f"Adjacent list: {graph}")
 
-    distances = dijkstra(graph, 0)
-    print("\nShortest distances from node 0:")
-    print(distances)
+    distance, parent = dijkstra(graph, 0)
+    print(f"Shortest distances from node 0: {distance}")
+    print(f"Parent array (shortest-path tree): {parent}")
+
+    # A. Raw graph
+    plot_graph(edges, title="Raw Graph")
+
+    # B. Distance heatmap
+    node_colors = distance_to_colors(distance)
+    plot_graph(edges, node_colors=node_colors, title="Dijkstra Distances")
+
+    # C. Shortest-path tree
+    tree_edges = extract_tree_edges(parent)
+    plot_graph(edges, highlight_edges=tree_edges, title="Dijkstra Tree")
