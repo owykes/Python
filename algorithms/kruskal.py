@@ -1,4 +1,4 @@
-# Kruskal - Minimum Spanning Tree
+# Kruskal - Minimum Spanning Tree - greedy alogrithm
 # Connects all nodes in the same tree via minimum edge weight 
 # Time Complexity: O(E * log E) or O(E * log V) 
 from helper import generate_edge_list
