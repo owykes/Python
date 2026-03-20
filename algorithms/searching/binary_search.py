@@ -1,4 +1,4 @@
-from helper import generate_list, get_target
+from algorithms.utils.helper import generate_list, get_target
 
 def binary_search(arr, target):
     """log2(n) divide the list in half each time"""

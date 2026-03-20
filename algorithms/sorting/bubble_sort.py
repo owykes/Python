@@ -1,4 +1,4 @@
-from helper import generate_list
+from algorithms.utils.helper import generate_list
 
 def bubble_sort(arr):
     """ Repeatedly compare adjacent elements potentially making multiple

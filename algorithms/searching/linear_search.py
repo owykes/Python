@@ -1,5 +1,5 @@
-from helper import generate_list
-from helper import get_target
+from algorithms.utils.helper import generate_list
+from algorithms.utils.helper import get_target
 
 def linear_search(arr, target):
     """Linear search for target in list, time complexity is: LINEAR TIME  worst case O(n), best case O(1) 

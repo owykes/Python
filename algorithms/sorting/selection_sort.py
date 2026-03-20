@@ -1,4 +1,4 @@
-from helper import generate_list
+from algorithms.utils.helper import generate_list
 
 def selection_sort(arr):
     """Sort the list in place by repeatedly selecting the smallest remaining element

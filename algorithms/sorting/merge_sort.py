@@ -1,4 +1,4 @@
-from helper import generate_list
+from algorithms.utils.helper import generate_list
 
 def merge_sort(arr):
     """ Splits the list into two halves, sorts each half recursively, 

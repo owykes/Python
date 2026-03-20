@@ -1,7 +1,7 @@
 # Kruskal - Minimum Spanning Tree - greedy alogrithm
 # Connects all nodes in the same tree via minimum edge weight 
 # Time Complexity: O(E * log E) or O(E * log V) 
-from helper import generate_edge_list
+from algorithms.utils.helper import generate_edge_list
 from functools import cmp_to_key
 
 def comparator(a,b):
@@ -57,11 +57,11 @@ class DSU:
 
 if __name__ == '__main__':
     
-    vertex = 6
-    edges = generate_edge_list(vertex)
+    vertices = 6
+    edges = generate_edge_list(vertices)
     print(f"Generated edges: {edges}")
 
-    cost, mst = kruskals_mst(vertex, edges)
+    cost, mst = kruskals_mst(vertices, edges)
     print("MST cost:", cost)
     print("MST edges:", mst)
 

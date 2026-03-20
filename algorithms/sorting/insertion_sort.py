@@ -1,4 +1,4 @@
-from helper import generate_list
+from algorithms.utils.helper import generate_list
 
 def insertion_sort(arr):
     """Insertion sort takes a on item fom a list and decalres it as sorted,
