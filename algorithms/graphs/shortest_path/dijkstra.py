@@ -1,6 +1,6 @@
 import sys
 import heapq
-from algorithms.utils.helper import generate_edge_list, edge_list_to_adj_list, plot_graph, extract_tree_edges, distance_to_colors 
+from  import generate_edge_list, edge_list_to_adj_list, plot_graph, extract_tree_edges, distance_to_colors 
 
 # Dijkstra's shortest path - pathfinding algorithm
 
