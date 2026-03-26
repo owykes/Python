@@ -112,3 +112,17 @@ def edge_list_to_adj_list(edges):
         graph[u].append((v, w))
         graph[v].append((u, w))
     return graph
+
+def edge_list_to_unweighted_adj_list(edges):
+    """Convert weighted edge list → unweighted adjacency list (for BFS/DFS)"""
+    max_node = 0
+    for u, v, _ in edges:
+        max_node = max(max_node, u, v)
+
+    graph = [[] for _ in range(max_node + 1)]
+
+    for u, v, _ in edges:
+        graph[u].append(v)
+        graph[v].append(u)
+
+    return graph

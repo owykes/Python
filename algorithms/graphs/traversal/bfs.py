@@ -1,25 +1,53 @@
 from collections import deque
+from algorithms.utils.helper import edge_list_to_unweighted_adj_list
+from algorithms.utils.helper import generate_edge_list
 
 def bfs(graph, start):
     """
-    Performs Breadth-First Search on a graph.
+    Breadth-First Search (BFS)
 
-    graph: dict where keys are nodes and values are lists of neighbours
-    start: starting node
+    Returns:
+        order: list of nodes in visitation order
+        distance: list of shortest distances from start
+        parent: list representing BFS tree
     """
-    visited = set()
-    queue = deque([start])
+    n = len(graph)
 
-    visited.add(start)
+    if start < 0 or start >= n:
+        raise ValueError("Start node is out of bounds")
+
+    visited = [False] * n
+    distance = [float('inf')] * n
+    parent = [None] * n
+
+    queue = deque()
+
+    visited[start] = True
+    distance[start] = 0
+    queue.append(start)
+
+    order = []
 
     while queue:
-        node = queue.popleft()
-        print(node, end=" ")
+        u = queue.popleft()
+        order.append(u)
 
-        for neighbour in graph[node]:
-            if neighbour not in visited:
-                visited.add(neighbour)
-                queue.append(neighbour)
+        for v in graph[u]:
+            if not visited[v]:
+                visited[v] = True
+                distance[v] = distance[u] + 1
+                parent[v] = u
+                queue.append(v)
+
+    return order, distance, parent
 
 if __name__ == "__main__":
+    
+    edges = generate_edge_list(6)
+    graph = edge_list_to_unweighted_adj_list(edges)
+    order, distance, parent = bfs(graph, start=0)
+
+    print("Order:", order)
+    print("DistanceL", distance)
+    print("Parent:", parent)
     
