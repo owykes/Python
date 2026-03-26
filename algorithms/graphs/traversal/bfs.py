@@ -48,6 +48,6 @@ if __name__ == "__main__":
     order, distance, parent = bfs(graph, start=0)
 
     print("Order:", order)
-    print("DistanceL", distance)
+    print("Distance", distance)
     print("Parent:", parent)
     
